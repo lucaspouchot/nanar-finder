@@ -6,9 +6,9 @@ export function AllRoutes() {
     <Routes>
       <Route path="/" element={<MovieList />} />
       <Route path="/movie/:id" element={<MovieDetail />} />
-      <Route path="/movies/top" element={<MovieList />} />
-      <Route path="/movies/popular" element={<MovieList />} />
-      <Route path="/movies/upcoming" element={<MovieList />} />
+      <Route path="/movies/bottom" element={<MovieList sort='bottom' />} />
+      <Route path="/movies/unpopular" element={<MovieList sort='unpopular' />} />
+      <Route path="/movies/upcoming" element={<MovieList sort='upcoming' />} />
       <Route path="/search" element={<Search />} />
       <Route path="*" element={<PageNotFound />} />
     </Routes>
