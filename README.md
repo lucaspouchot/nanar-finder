@@ -1,3 +1,12 @@
+# Environment variables
+
+You need to create a .env file in the root of the project with the following variables:
+```
+REACT_APP_TMDB_API_KEY=<your api key>
+REACT_APP_TMDB_API_URL=https://api.themoviedb.org/3
+REACT_APP_TMDB_IMAGE_URL=https://image.tmdb.org/t/p/w500
+```
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
