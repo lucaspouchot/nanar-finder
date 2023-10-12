@@ -5,12 +5,14 @@ declare namespace NodeJS {
     REACT_APP_TMDB_API_KEY: string;
     REACT_APP_TMDB_API_URL: string;
     REACT_APP_TMDB_IMAGE_URL: string;
+    REACT_APP_TMDB_LARGE_IMAGE_URL: string;
   }
 }
 
 type JSXChildren = string | JSX.Element | JSX.Element[] | (() => JSX.Element);
 
 type JSXProps = {
+  className?: string;
   children?: JSXChildren;
 }
 

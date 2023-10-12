@@ -1,43 +1,59 @@
 import { Card } from "../components";
 import { MovieService } from "../services/Movie.service";
-import { useState } from "react";
-import Placeholder from "../assets/images/no-image-placeholder-transparent.png";
+import { useEffect, useState } from "react";
 import PlaceholderSmall from "../assets/images/no-image-placeholder-transparent-small.png";
+import { useSearchParams } from "react-router-dom";
+import { useTitle } from "../hooks";
 
 type MovieListProps = {
   sort?: MovieService.defaultSort;
+  title?: string;
 }
 
-export function MovieList({ sort = 'now_playing' }: MovieListProps = {}) {
+export function MovieList({ sort, title }: MovieListProps = {}) {
+  const [searchParams] = useSearchParams();
+  const search = searchParams.get('search') || '';
   const [filter, setFilter] = useState({
-    defaultSort: sort
+    defaultSort: sort,
+    search,
   });
+
+  useTitle(search ? search : title);
+
+  useEffect(() => {
+    setFilter({
+      defaultSort: sort,
+      search,
+    });
+  }, [sort, searchParams]);
+
   const movies = MovieService.useGet(filter);
 
   return (
     <main>
-      <button onClick={() => setFilter({defaultSort: 'now_playing'})}>Recent</button>
-      <button onClick={() => setFilter({defaultSort: 'unpopular'})}>unpopular</button>
-      <button onClick={() => setFilter({defaultSort: 'bottom'})}>Bottom Ratted</button>
-      <button onClick={() => setFilter({defaultSort: 'upcoming'})}>Upcoming</button>
+      {
+        search &&
+          <section className="pb-7 justify-center text-center">
+            <p className="text-3xl text-gray-700 dark:text-white">Result for : {search}</p>
+          </section>
+      }
       <section className="flex flex-wrap justify-center gap-4">
         {
-          movies.loading && <p>Loading</p>
+          movies.loading && <p className="text-3xl text-gray-700 dark:text-white">Loading</p>
         }
         {
-          movies.error && <p>Error: {movies.error.message}</p>
+          movies.error && <p className="text-3xl text-gray-700 dark:text-white">Error: {movies.error.message}</p>
         }
         {
-          movies.data?.results.map((movie, index) => (
-            <Card
+          !movies.loading && movies.data && movies.data.results.length > 0 && movies.data.results.map((movie, index) => {
+            return <Card
               key={index}
               title={movie.title}
               description={movie.overview ? movie.overview : 'Pas de description, ça sent bon !'}
-              image={movie.backdrop_path ? `${process.env.REACT_APP_TMDB_IMAGE_URL}${movie.backdrop_path}` : Placeholder}
-              smallImage={movie.poster_path ? `${process.env.REACT_APP_TMDB_IMAGE_URL}${movie.poster_path}` : PlaceholderSmall}
+              image={movie.poster_path ? `${process.env.REACT_APP_TMDB_IMAGE_URL}${movie.poster_path}` : PlaceholderSmall}
               link={`/movie/${movie.id}`}
             />
-          ))
+          })
         }
       </section>
     </main>
