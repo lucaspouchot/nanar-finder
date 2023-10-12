@@ -1,7 +1,14 @@
 import PageNotFoundImg from '../assets/images/pagenotfound.png';
 import { Button } from "../components";
+import { useTitle } from "../hooks";
 
-export function PageNotFound() {
+type PageNotFoundProps = {
+  title?: string;
+}
+
+export function PageNotFound({ title }: PageNotFoundProps) {
+  useTitle(title);
+
   return (
     <main>
       <section className='flex flex-col justify-center px-2'>

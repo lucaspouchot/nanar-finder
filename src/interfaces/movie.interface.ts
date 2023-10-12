@@ -1,7 +1,8 @@
 export interface MovieInterface {
   adult: boolean;
   backdrop_path: string;
-  genres: string[];
+  genre_ids: string[];
+  genres: { id: number, name: string }[];
   id: number;
   original_language: string,
   original_title: string,
@@ -12,5 +13,7 @@ export interface MovieInterface {
   title: string,
   video: boolean,
   vote_average: number,
-  vote_count: number
+  vote_count: number,
+  runtime: number,
+  imdb_id: string,
 }

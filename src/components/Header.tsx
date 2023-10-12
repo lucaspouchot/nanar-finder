@@ -79,13 +79,13 @@ export function Header() {
             </div>
             <ul className="flex flex-col p-4 min-[1000px]:p-0 mt-4 font-medium border border-gray-100 rounded-lg bg-gray-50 min-[1000px]:flex-row min-[1000px]:space-x-8 min-[1000px]:mt-0 min-[1000px]:border-0 min-[1000px]:bg-white dark:bg-gray-800 min-[1000px]:dark:bg-gray-900 dark:border-gray-700">
               <li>
-                <NavLink to="/" className={linkClass} aria-current="page" end>Recent</NavLink>
+                <NavLink to="/" className={linkClass} aria-current="page" end>Bottom Rated</NavLink>
               </li>
               <li>
                 <NavLink to="/movies/unpopular" className={linkClass}>Unpopular</NavLink>
               </li>
               <li>
-                <NavLink to="/movies/bottom" className={linkClass}>Bottom Rated</NavLink>
+                <NavLink to="/movies/recent" className={linkClass}>Recent</NavLink>
               </li>
               <li>
                 <NavLink to="/movies/upcoming" className={linkClass}>Upcoming</NavLink>

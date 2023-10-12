@@ -3,18 +3,22 @@ import { MovieService } from "../services/Movie.service";
 import { useEffect, useState } from "react";
 import PlaceholderSmall from "../assets/images/no-image-placeholder-transparent-small.png";
 import { useSearchParams } from "react-router-dom";
+import { useTitle } from "../hooks";
 
 type MovieListProps = {
   sort?: MovieService.defaultSort;
+  title?: string;
 }
 
-export function MovieList({ sort }: MovieListProps = {}) {
+export function MovieList({ sort, title }: MovieListProps = {}) {
   const [searchParams] = useSearchParams();
   const search = searchParams.get('search') || '';
   const [filter, setFilter] = useState({
     defaultSort: sort,
     search,
   });
+
+  useTitle(search ? search : title);
 
   useEffect(() => {
     setFilter({
@@ -29,7 +33,7 @@ export function MovieList({ sort }: MovieListProps = {}) {
     <main>
       {
         search &&
-          <section className="pb-7 pl-2">
+          <section className="pb-7 justify-center text-center">
             <p className="text-3xl text-gray-700 dark:text-white">Result for : {search}</p>
           </section>
       }

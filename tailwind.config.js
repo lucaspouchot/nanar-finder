@@ -20,6 +20,9 @@ module.exports = {
   plugins: [
     plugin(function ({ addBase, addUtilities, theme }) {
       addBase({
+        body: {
+          minWidth: '334px',
+        },
         header: {
           zIndex: 30,
         },
@@ -54,6 +57,12 @@ module.exports = {
         ".shadow-top": {
           boxShadow: "0 -2px 4px -1px rgba(0,0,0,0.1)",
         },
+        ".dark .text-shadow": {
+          textShadow: "1px 0 #2d2622, -1px 0 #2d2622, 0 1px #2d2622, 0 -1px #2d2622, 1px 1px #2d2622, -1px -1px #2d2622, 1px -1px #2d2622, -1px 1px #2d2622",
+        },
+        ".text-shadow": {
+          textShadow: "1px 0 #e1e1e1, -1px 0 #e1e1e1, 0 1px #e1e1e1, 0 -1px #e1e1e1, 1px 1px #e1e1e1, -1px -1px #e1e1e1, 1px -1px #e1e1e1, -1px 1px #e1e1e1",
+        }
       });
     }),
   ],

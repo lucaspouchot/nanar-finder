@@ -1,5 +1,5 @@
 import { MovieInterface } from "../interfaces/movie.interface";
-import { FetchGetResponse, useFetchGet } from "../hooks/useFetch";
+import { FetchGetResponse, useFetchGet } from "../hooks";
 import { useEffect, useState } from "react";
 import { TMDBPaginatedInterface } from "../interfaces/tmdb.interface";
 
