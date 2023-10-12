@@ -63,4 +63,18 @@ export namespace MovieService {
 
     return response;
   }
+
+  export function useGetById(id?: string | number): FetchGetResponse<MovieInterface> {
+    const [url, setUrl] = useState<URL | string | null>(null);
+    const response = useFetchGet<MovieInterface>(url);
+
+    useEffect(() => {
+      let newUrl = new URL(`${process.env.REACT_APP_TMDB_API_URL || ""}/movie/${id}`);
+      newUrl.searchParams.append('api_key', process.env.REACT_APP_TMDB_API_KEY || "");
+      newUrl.searchParams.append('language', "fr-FR");
+      setUrl(newUrl);
+    }, [id]);
+
+    return response;
+  }
 }

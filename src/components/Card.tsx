@@ -11,16 +11,16 @@ type CardProps = {
 
 export function Card({ title, description, image, smallImage, link }: CardProps) {
   return (
-    <Link to={link ? link : '#'} className="flex flex-row md:flex-col md:justify-between w-[90vw] md:w-80 items-center bg-white border border-gray-200 rounded shadow hover:bg-gray-100 dark:border-gray-700 dark:bg-slate-900 dark:hover:bg-slate-950">
+    <Link to={link ? link : '#'} className="group flex flex-row md:flex-col md:justify-between w-[90vw] md:w-80 items-center bg-white border border-gray-200 rounded shadow hover:bg-gray-100 dark:border-gray-700 dark:bg-slate-900 dark:hover:bg-slate-950">
       { image
         ? <>
           {
             smallImage
               ? <>
-                  <img className="md:hidden block object-cover rounded-l h-52" src={smallImage} alt="" />
-                  <img className="hidden md:block object-cover w-full h-auto rounded-none rounded-t" src={image} alt="" />
+                  <img className="md:hidden block object-cover rounded-l h-52 group-hover:contrast-125" src={smallImage} alt="" />
+                  <img className="hidden md:block object-cover w-full h-auto rounded-none rounded-t group-hover:contrast-125" src={image} alt="" />
                 </>
-              : <img className="object-cover w-60 md:w-full rounded-l h-96 md:h-112 md:rounded-none md:rounded-t" src={image} alt="" />
+              : <img className="object-cover w-60 md:w-full rounded-l h-96 md:h-112 md:rounded-none md:rounded-t group-hover:contrast-125" src={image} alt="" />
           }
           </>
         : <></>

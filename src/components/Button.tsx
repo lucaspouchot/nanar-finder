@@ -6,7 +6,7 @@ type ButtonProps = {
   action?: () => void;
 } & JSXProps;
 
-export function Button({ to, size = 'small', children, action = () => {} }: ButtonProps) {
+export function Button({ to, size = 'small', children, className = '', action = () => {} }: ButtonProps) {
   let sizeClass: string = 'text-3xl px-8 py-4';
   if(size === 'small'){
     sizeClass = 'px-6 py-2';
@@ -17,10 +17,10 @@ export function Button({ to, size = 'small', children, action = () => {} }: Butt
       {
         to
         ? <Link to={to}>
-            <button className={`${sizeClass} rounded shadow text-gray-700 bg-white hover:bg-slate-600 hover:text-white dark:text-white dark:bg-slate-600 hover:dark:bg-slate-700`}><>{text}</></button>
+            <button className={`${sizeClass} ${className} rounded shadow text-gray-700 bg-white hover:bg-slate-600 hover:text-white dark:text-white dark:bg-slate-700 hover:dark:bg-slate-600`}><>{text}</></button>
           </Link>
         :
-        <button onClick={action} className={`${sizeClass} rounded shadow text-gray-700 bg-white hover:bg-slate-600 hover:text-white dark:text-white dark:bg-slate-600 hover:dark:bg-slate-700`}>{text}</button>
+        <button onClick={action} className={`${sizeClass} ${className} rounded shadow text-gray-700 bg-white hover:bg-slate-600 hover:text-white dark:text-white dark:bg-slate-700 hover:dark:bg-slate-600`}>{text}</button>
       }
     </>
   );

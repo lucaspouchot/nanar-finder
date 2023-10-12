@@ -8,16 +8,26 @@ module.exports = {
       height: {
         '112': '28rem',
         '128': '32rem',
+      },
+      borderRadius: {
+        'xl': '0.75rem',
+        '2xl': '1rem',
+        '3xl': '1.5rem',
+        '4xl': '2rem',
       }
     }
   },
   plugins: [
     plugin(function ({ addBase, addUtilities, theme }) {
       addBase({
+        header: {
+          zIndex: 30,
+        },
         main: {
           margin: '2rem auto 0 auto',
           maxWidth: theme('screens.xl'),
           paddingBottom: '5.4rem',
+          zIndex: 20,
         },
         footer: {
           position: 'absolute',
