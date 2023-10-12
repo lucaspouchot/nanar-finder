@@ -25,7 +25,7 @@ export function MovieList({ sort, title }: MovieListProps = {}) {
       defaultSort: sort,
       search,
     });
-  }, [sort, searchParams]);
+  }, [sort, search, searchParams]);
 
   const movies = MovieService.useGet(filter);
 

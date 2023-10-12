@@ -55,6 +55,7 @@ export function MovieDetail({ title = '' }: MovieDetailProps) {
                 </p>
             }
             {
+              // eslint-disable-next-line
               (movie.data?.genres?.length || 0 > 0) &&
                 <p className="flex flex-wrap gap-2">
                   {
@@ -72,6 +73,7 @@ export function MovieDetail({ title = '' }: MovieDetailProps) {
                 </p>
             }
             {
+              // eslint-disable-next-line
               (movie.data?.runtime || 0 > 0) &&
                 <p className="text-lg md:text-xl">
                   {toHoursAndMinutes(movie.data?.runtime || 0)}
