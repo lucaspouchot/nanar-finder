@@ -29,16 +29,15 @@ export function MovieList({ sort = 'now_playing' }: MovieListProps = {}) {
           movies.error && <p>Error: {movies.error.message}</p>
         }
         {
-          movies.data?.results.map((movie, index) => (
-            <Card
+          !movies.loading && movies.data && movies.data.results.map((movie, index) => {
+            return <Card
               key={index}
               title={movie.title}
               description={movie.overview ? movie.overview : 'Pas de description, ça sent bon !'}
-              image={movie.backdrop_path ? `${process.env.REACT_APP_TMDB_IMAGE_URL}${movie.backdrop_path}` : Placeholder}
-              smallImage={movie.poster_path ? `${process.env.REACT_APP_TMDB_IMAGE_URL}${movie.poster_path}` : PlaceholderSmall}
+              image={movie.poster_path ? `${process.env.REACT_APP_TMDB_IMAGE_URL}${movie.poster_path}` : PlaceholderSmall}
               link={`/movie/${movie.id}`}
             />
-          ))
+          })
         }
       </section>
     </main>

@@ -5,7 +5,10 @@ module.exports = {
   darkMode: 'class', // or 'media' or 'class'
   theme: {
     extend: {
-
+      height: {
+        '112': '28rem',
+        '128': '32rem',
+      }
     }
   },
   plugins: [
