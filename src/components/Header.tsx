@@ -1,14 +1,23 @@
+import React, { useEffect, useState } from "react";
 import Logo from '../assets/logo.png';
-import { Link, NavLink } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 
 export function Header() {
   const [darkMode, setDarkMode] = useState(JSON.parse(localStorage.getItem("darkMode") || 'false'));
   const [hidden, setHidden] = useState(true);
+  const navigate = useNavigate();
+
   const linkClassPos: string = "block text-base min-[1000px]:text-lg py-2 pl-3 pr-4 rounded min-[1000px]:p-0"
   const linkClassLight: string = "text-gray-500 hover:bg-gray-100 min-[1000px]:hover:bg-transparent min-[1000px]:hover:text-blue-700"
   const linkClassDark: string ="dark:text-gray-400 dark:hover:bg-gray-700 min-[1000px]:dark:hover:bg-transparent min-[1000px]:dark:hover:text-gray-300 dark:hover:text-gray-300 dark:border-gray-700"
   const linkClass: string = `${linkClassPos} ${linkClassLight} ${linkClassDark}`
+
+  const handleSearch = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const search = e.currentTarget.search.value as string;
+    e.currentTarget.reset();
+    return navigate(`/movies?search=${search}`);
+  }
 
   useEffect(() => {
     localStorage.setItem("darkMode", JSON.stringify(darkMode));
@@ -46,7 +55,9 @@ export function Header() {
                 </svg>
                 <span className="sr-only">Search icon</span>
               </div>
-              <input type="text" id="search-navbar" className="block w-full p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search..." />
+              <form onSubmit={handleSearch}>
+                <input type="text" name="search" id="search-navbar" className="block w-full p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search..." />
+              </form>
             </div>
             <button onClick={() => setHidden(hidden => !hidden)} data-collapse-toggle="navbar-search" type="button" className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg min-[1000px]:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="navbar-search" aria-expanded="false">
               <span className="sr-only">Open main menu</span>
@@ -62,7 +73,9 @@ export function Header() {
                   <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
                 </svg>
               </div>
-              <input type="text" id="search-navbar" className="block w-full p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search..." />
+              <form onSubmit={handleSearch}>
+                <input type="text" name="search" id="search-navbar" className="block w-full p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search..." />
+              </form>
             </div>
             <ul className="flex flex-col p-4 min-[1000px]:p-0 mt-4 font-medium border border-gray-100 rounded-lg bg-gray-50 min-[1000px]:flex-row min-[1000px]:space-x-8 min-[1000px]:mt-0 min-[1000px]:border-0 min-[1000px]:bg-white dark:bg-gray-800 min-[1000px]:dark:bg-gray-900 dark:border-gray-700">
               <li>

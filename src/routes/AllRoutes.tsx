@@ -1,5 +1,5 @@
 import { Routes, Route } from "react-router-dom";
-import { MovieList, MovieDetail, Search, PageNotFound } from "../pages";
+import { MovieList, MovieDetail, PageNotFound } from "../pages";
 
 export function AllRoutes() {
   return (
@@ -9,7 +9,7 @@ export function AllRoutes() {
       <Route path="/movies/bottom" element={<MovieList sort='bottom' />} />
       <Route path="/movies/unpopular" element={<MovieList sort='unpopular' />} />
       <Route path="/movies/upcoming" element={<MovieList sort='upcoming' />} />
-      <Route path="/search" element={<Search />} />
+      <Route path="/movies" element={<MovieList sort='none' />} />
       <Route path="*" element={<PageNotFound />} />
     </Routes>
   );
