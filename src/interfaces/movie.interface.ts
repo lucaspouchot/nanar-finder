@@ -16,4 +16,14 @@ export interface MovieInterface {
   vote_count: number,
   runtime: number,
   imdb_id: string,
+  budget: number,
+  revenue: number,
+}
+
+export interface MovieCardInterface {
+  id: number;
+  title: string;
+  description: string;
+  image?: string;
+  smallImage?: string;
 }

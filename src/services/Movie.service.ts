@@ -1,7 +1,9 @@
-import { MovieInterface } from "../interfaces/movie.interface";
+import { MovieCardInterface, MovieInterface } from "../interfaces/movie.interface";
 import { FetchGetResponse, useFetchGet } from "../hooks";
 import { useEffect, useState } from "react";
 import { TMDBPaginatedInterface } from "../interfaces/tmdb.interface";
+import { useSelector } from "react-redux";
+import { RootState } from "../store/store";
 
 export namespace MovieService {
   export type defaultSort = 'none' | 'now_playing' | 'unpopular' | 'bottom' | 'upcoming';
@@ -76,5 +78,9 @@ export namespace MovieService {
     }, [id]);
 
     return response;
+  }
+
+  export function useGetWatchlist(): MovieCardInterface[] {
+    return useSelector((state: RootState) => state.watchListState)
   }
 }
