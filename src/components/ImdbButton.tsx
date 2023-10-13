@@ -1,10 +1,11 @@
 type ImdbButtonProps = {
   imdbId: string;
+  className?: string;
 };
 
-export function ImdbButton({ imdbId }: ImdbButtonProps) {
+export function ImdbButton({ imdbId, className }: ImdbButtonProps) {
   return (
-    <a href={`https://www.imdb.com/title/${imdbId}`} target='_blank' rel="noreferrer noopener">
+    <a className={className} href={`https://www.imdb.com/title/${imdbId}`} target='_blank' rel="noreferrer noopener">
       <svg id="home_img" className="ipc-logo" xmlns="http://www.w3.org/2000/svg" width="64" height="32" viewBox="0 0 64 32" version="1.1">
         <g fill="#F5C518">
           <rect x="0" y="0" width="100%" height="100%" rx="4"></rect>

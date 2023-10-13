@@ -1,3 +1,7 @@
+# Website
+
+[https://nanar-finder.netlify.app/](https://nanar-finder.netlify.app/)
+
 # Environment variables
 
 You need to create a .env file in the root of the project with the following variables:
@@ -5,6 +9,7 @@ You need to create a .env file in the root of the project with the following var
 REACT_APP_TMDB_API_KEY=<your api key>
 REACT_APP_TMDB_API_URL=https://api.themoviedb.org/3
 REACT_APP_TMDB_IMAGE_URL=https://image.tmdb.org/t/p/w500
+REACT_APP_TMDB_LARGE_IMAGE_URL=https://image.tmdb.org/t/p/w1920_and_h800_multi_faces
 ```
 
 # Getting Started with Create React App

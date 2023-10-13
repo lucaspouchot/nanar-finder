@@ -1,9 +1,13 @@
 import { useParams } from "react-router-dom";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { MovieService } from "../services/Movie.service";
 import NoImagePlaceholder from "../assets/images/no-image-placeholder-transparent.png";
 import { Button, ImdbButton } from "../components";
 import { useTitle } from "../hooks";
+import { currencyFormatter } from "../utils";
+import { TmdbButton } from "../components/TmdbButton";
+import { useDispatch } from "react-redux";
+import { addMovieToWatchlist, removeMovieFromWatchlist } from "../store/watchlist/watchListSlice";
 
 type MovieDetailProps = {
   title?: string;
@@ -11,8 +15,25 @@ type MovieDetailProps = {
 
 export function MovieDetail({ title = '' }: MovieDetailProps) {
   const params = useParams();
-  const [movieId] = useState(params.id);
+  const [movieId] = useState(Number.parseInt(params.id || '0', 10));
+  const watchListMovies = MovieService.useGetWatchlist();
   const movie = MovieService.useGetById(movieId)
+  const [inWatchList, setInWatchList] = useState(watchListMovies?.some((movie) => movieId && movie.id === movieId));
+  const dispatch = useDispatch()
+
+  const handleWatchlist = () => {
+    if (!movie.data) return;
+    dispatch(inWatchList ? removeMovieFromWatchlist(movie.data.id) : addMovieToWatchlist({
+      id: movie.data.id,
+      title: movie.data.title,
+      description: movie.data.overview,
+      image: movie.data.poster_path,
+    }));
+  }
+
+  useEffect(() => {
+    setInWatchList(watchListMovies?.some((item) => movieId && item.id === movieId));
+  }, [watchListMovies, movieId]);
 
   useTitle(movie.data?.title || title);
 
@@ -80,12 +101,37 @@ export function MovieDetail({ title = '' }: MovieDetailProps) {
                 </p>
             }
             </span>
-            {
-              movie.data?.imdb_id && <ImdbButton imdbId={movie.data?.imdb_id} />
-            }
-            <p className="font-normal text-justify md:text-lg">
-              {movie.data?.overview}
+            <span className="flex flex-wrap gap-x-4 gap-y-2">
+              {
+                movie.data?.imdb_id && <ImdbButton imdbId={movie.data?.imdb_id} />
+              }
+              {
+                movieId && <TmdbButton tmdbId={movieId} />
+              }
+            </span>
+            <p>
+              <div className="mr-2 font-bold">Description:</div>
+              <span className="font-normal text-justify md:text-lg">{movie.data?.overview ||  'No description provided' }</span>
             </p>
+
+            <div className="flex items-center">
+              <svg aria-hidden="true" className="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Rating star</title><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+              <p className="ml-2 text-gray-900 dark:text-white">{movie.data?.vote_average.toFixed(1)}/10</p>
+              <span className="w-1 h-1 mx-3 bg-gray-500 rounded-full dark:bg-gray-400"></span>
+              <span className="text-gray-900 dark:text-white">{movie.data?.vote_count} reviews</span>
+            </div>
+
+            <p>
+              <span className="mr-2 font-bold">Budget:</span>
+              <span>{movie.data?.budget ? currencyFormatter.format(movie.data?.budget) : '-'}</span>
+            </p>
+
+            <p>
+              <span className="mr-2 font-bold">Revenue:</span>
+              <span>{movie.data?.revenue ? currencyFormatter.format(movie.data?.revenue) : '-'}</span>
+            </p>
+
+            <Button action={handleWatchlist} >{ inWatchList ? 'Remove from watchlist' : 'Add to watchlist' }</Button>
           </div>
         </section>
       </main>

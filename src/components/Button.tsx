@@ -1,9 +1,10 @@
 import { Link } from 'react-router-dom';
+import React from "react";
 
 type ButtonProps = {
   to?: string;
   size?: 'big' | 'small';
-  action?: () => void;
+  action?: (e: React.MouseEvent<HTMLButtonElement>) => void;
 } & JSXProps;
 
 export function Button({ to, size = 'small', children, className = '', action = () => {} }: ButtonProps) {
@@ -20,7 +21,7 @@ export function Button({ to, size = 'small', children, className = '', action = 
             <button className={`${sizeClass} ${className} rounded shadow text-gray-700 bg-white hover:bg-slate-600 hover:text-white dark:text-white dark:bg-slate-700 hover:dark:bg-slate-600`}><>{text}</></button>
           </Link>
         :
-        <button onClick={action} className={`${sizeClass} ${className} rounded shadow text-gray-700 bg-white hover:bg-slate-600 hover:text-white dark:text-white dark:bg-slate-700 hover:dark:bg-slate-600`}>{text}</button>
+        <button onClick={(e) => action(e)} className={`${sizeClass} ${className} rounded shadow text-gray-700 bg-white hover:bg-slate-600 hover:text-white dark:text-white dark:bg-slate-700 hover:dark:bg-slate-600`}>{text}</button>
       }
     </>
   );
